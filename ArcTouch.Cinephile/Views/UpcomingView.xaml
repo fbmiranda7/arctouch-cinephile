@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<arc:BaseView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ArcTouch.Cinephile.Views.UpcomingView"
+             xmlns:arc="clr-namespace:ArcTouch.Cinephile.Base"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             BackgroundColor="Black">
+    <ContentPage.Content>
+        <ListView x:Name="list" RowHeight="200" CachingStrategy="RetainElement">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <RelativeLayout>
+                            
+                            <ActivityIndicator IsRunning="True"
+                                   RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=-20}"
+                                   RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=.5, Constant=-20}"
+                                   />
+
+                            <ffimageloading:CachedImage 
+                                   Aspect="AspectFill"
+                                   RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=0}"
+                                   RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}"
+                                   RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=0}"
+                                   RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=0}"
+                                   DownsampleToViewSize="false"
+                                   Source="{Binding Movie.BackdropPath}">
+                            </ffimageloading:CachedImage>
+                          
+                            <Label Text="{Binding Movie.Title}"
+                                   FontAttributes="Bold"
+                                   FontSize="Medium"
+                                   FontFamily="Roboto"
+                                   LineBreakMode="TailTruncation"
+                                   RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=20}"
+                                   RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-50}"
+                                   RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-40}"
+                                   TextColor="White"
+                                   />
+
+                            <Label Text="{Binding ReleaseDate}"
+                                   FontSize="Small"
+                                   FontFamily="Roboto"
+                                   RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=20}"
+                                   RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-30}"
+                                   TextColor="White"
+                                   />
+                            
+                        </RelativeLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </ContentPage.Content>
+</arc:BaseView>

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<arc:BaseView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ArcTouch.Cinephile.Views.SplashView"
+             xmlns:arc="clr-namespace:ArcTouch.Cinephile.Base"
+             BackgroundColor="Black">
+    <ContentPage.Content>
+
+      <RelativeLayout>
+
+        <Image
+            x:Name="bg"
+            Source="bg.png"
+            Opacity="0"
+            Aspect="AspectFill"
+            RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=0}"
+            RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}"
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=0}"
+            RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=0}"
+         />
+
+        <Image
+            x:Name="powered"
+            Source="powered.png"
+            Opacity="0"
+            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=.5, Constant=-75}"
+            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=.5, Constant=-50}"
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=Constant, Constant=150}"
+         />
+        
+      </RelativeLayout>
+      
+    </ContentPage.Content>
+</arc:BaseView>

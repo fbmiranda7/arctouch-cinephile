@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<arc:BaseView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ArcTouch.Cinephile.Views.DetailsView"
+             xmlns:arc="clr-namespace:ArcTouch.Cinephile.Base"
+             BackgroundColor="Black">
+    <ContentPage.Content>
+        <RelativeLayout>
+
+            <Image
+                x:Name="image"
+                Opacity=".3"
+                Aspect="AspectFill"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=0}"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=0}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=0}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=0}"
+                />
+
+            <Label
+                x:Name="overView"
+                FontSize="Medium"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=20}"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=Constant, Constant=20}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-40}"
+                TextColor="White"
+                />
+            
+            <Label
+                x:Name="title"
+                FontAttributes="Bold"
+                FontSize="Large"
+                FontFamily="Roboto"
+                LineBreakMode="WordWrap"
+                VerticalTextAlignment="End"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=20}"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-150}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-40}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression Type=Constant, Constant=60}"
+                TextColor="White"
+                />
+
+            <Label
+                x:Name="genres"
+                FontSize="Medium"
+                FontFamily="Roboto"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=20}"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-70}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-40}"
+                TextColor="White"
+                />
+            
+            <Label
+                x:Name="releaseDate"
+                FontSize="Medium"
+                FontFamily="Roboto"
+                RelativeLayout.XConstraint="{ConstraintExpression Type=Constant, Constant=20}"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1, Constant=-30}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1, Constant=-40}"
+                TextColor="White"
+                />
+
+        </RelativeLayout>
+    </ContentPage.Content>
+</arc:BaseView>
