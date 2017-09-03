@@ -9,6 +9,8 @@ using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System;
+using System.Threading.Tasks;
+using System.Net;
 
 namespace ArcTouch.Cinephile.Views
 {
@@ -75,7 +77,7 @@ namespace ArcTouch.Cinephile.Views
                 var items = list.ItemsSource as IList;
 
                 // on the last item, request for more
-                if (e.Item == items[items.Count - 1])
+                if (items.Count > 0 && e.Item == items[items.Count - 1])
                     Presenter.FetchAndAppend();
             }
         }
@@ -103,7 +105,14 @@ namespace ArcTouch.Cinephile.Views
 
         internal void ClearResults()
         {
-            movieList.Clear();
+            try
+            {
+                movieList.Clear();
+            }
+            catch (WebException)
+            {
+                // some requests get aborted when clearing the list, just ignore
+            }
         }
     }
 }
