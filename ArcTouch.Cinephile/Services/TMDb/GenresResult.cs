@@ -13,6 +13,6 @@ namespace ArcTouch.Cinephile.Services.TMDb
     public class GenresResult
     {
         [JsonProperty("genres")]
-        public Genre[] Genres { get; set; }
+        public TMDb.Genre[] Genres { get; set; }
     }
 }

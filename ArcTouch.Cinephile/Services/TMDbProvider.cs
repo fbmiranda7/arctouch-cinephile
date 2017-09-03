@@ -3,9 +3,9 @@ using ArcTouch.Cinephile.Services.TMDb;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Linq;
 
 namespace ArcTouch.Cinephile.Services
 {
@@ -17,7 +17,7 @@ namespace ArcTouch.Cinephile.Services
         private const string API_KEY = "1f54bd990f1cdfb230adb312546d765d";
         private const string BASE_URL = "https://api.themoviedb.org/3/{0}?api_key={1}";
 
-        public Genre[] Genres { get; private set; }
+        public TMDb.Genre[] Genres { get; private set; }
 
         private class Calls
         {
@@ -40,7 +40,7 @@ namespace ArcTouch.Cinephile.Services
             Genres = result.Genres;
         }
 
-        public async Task<IEnumerable<Movie>> FetchUpcoming(int page = 1)
+        public async Task<IEnumerable<Entity.Movie>> FetchUpcoming(int page = 1)
         {
             string url = FormatUrl(Calls.Upcoming, "&page=" + page);
 
@@ -51,7 +51,7 @@ namespace ArcTouch.Cinephile.Services
             return result.Results;
         }
 
-        public async Task<IEnumerable<Movie>> Search(string query)
+        public async Task<IEnumerable<Entity.Movie>> Search(string query)
         {
             string url = FormatUrl(Calls.Search, "&query=" + System.Net.WebUtility.UrlEncode(query));
 
@@ -99,9 +99,9 @@ namespace ArcTouch.Cinephile.Services
         /// Fixes relative paths so that the ui can use the url seamlessly
         /// </summary>
         /// <param name="results"></param>
-        private void UpdateRelativePaths(Movie[] results)
+        private void UpdateRelativePaths(Entity.Movie[] results)
         {
-            foreach(Movie movie in results)
+            foreach(Entity.Movie movie in results)
             {
                 movie.BackdropPath = "https://image.tmdb.org/t/p/w780" + movie.BackdropPath;
                 movie.PosterPath = "https://image.tmdb.org/t/p/w500" + movie.PosterPath;
@@ -113,7 +113,7 @@ namespace ArcTouch.Cinephile.Services
             return string.Format(BASE_URL, call, API_KEY) + additionalParameters;
         }
 
-        public IEnumerable<Genre> GetGenres(int[] genreIds)
+        public IEnumerable<Entity.Genre> GetGenres(int[] genreIds)
         {
             if (Genres == null || Genres.Length == 0)
                 InitializeProvider().Wait();

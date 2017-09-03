@@ -1,5 +1,4 @@
 ﻿using ArcTouch.Cinephile.Entity;
-using ArcTouch.Cinephile.Services.TMDb;
 using System;
 using System.Collections.Generic;
 using System.Linq;

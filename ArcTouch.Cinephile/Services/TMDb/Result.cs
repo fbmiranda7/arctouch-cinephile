@@ -14,7 +14,7 @@ namespace ArcTouch.Cinephile.Services.TMDb
     public class Result
     {
         [JsonProperty("results")]
-        public Movie[] Results { get; set; }
+        public TMDb.Movie[] Results { get; set; }
 
         [JsonProperty("page")]
         public int Page { get; set; }

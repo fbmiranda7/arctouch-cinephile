@@ -10,12 +10,12 @@ namespace ArcTouch.Cinephile.Services.TMDb
     /// <summary>
     /// Wraps the json for a Genre
     /// </summary>
-    public class Genre
+    public class Genre : ArcTouch.Cinephile.Entity.Genre
     {
         [JsonProperty("id")]
         public int Id { get; set; }
 
         [JsonProperty("name")]
-        public string Name { get; set; }
+        public override string Name { get; set; }
     }
 }

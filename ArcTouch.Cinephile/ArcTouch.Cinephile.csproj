@@ -40,6 +40,7 @@
     </Compile>
     <Compile Include="Base\BasePresenter.cs" />
     <Compile Include="Base\BaseView.cs" />
+    <Compile Include="Entity\Genre.cs" />
     <Compile Include="Entity\Movie.cs" />
     <Compile Include="IoC\ApplicationModule.cs" />
     <Compile Include="IoC\Resolver.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Services\TMDbProvider.cs" />
     <Compile Include="Services\TMDb\Genre.cs" />
     <Compile Include="Services\TMDb\GenresResult.cs" />
+    <Compile Include="Services\TMDb\Movie.cs" />
     <Compile Include="Services\TMDb\Result.cs" />
     <Compile Include="Views\DetailsView.xaml.cs">
       <DependentUpon>DetailsView.xaml</DependentUpon>
