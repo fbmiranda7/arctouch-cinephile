@@ -16,6 +16,8 @@ namespace ArcTouch.Cinephile.Services
     {
         private const string API_KEY = "1f54bd990f1cdfb230adb312546d765d";
         private const string BASE_URL = "https://api.themoviedb.org/3/{0}?api_key={1}";
+        private HttpClient client;
+        private JsonSerializerSettings jsonSettings;
 
         public TMDb.Genre[] Genres { get; private set; }
 
@@ -28,6 +30,12 @@ namespace ArcTouch.Cinephile.Services
 
         public TMDbProvider()
         {
+            client = new HttpClient();
+            jsonSettings = new JsonSerializerSettings()
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            };
+
             InitializeProvider();
         }
 
@@ -70,7 +78,6 @@ namespace ArcTouch.Cinephile.Services
         /// <returns></returns>
         private async Task<T> Request<T>(string url)
         {
-            HttpClient client = new HttpClient();
 
             try
             { 
@@ -80,7 +87,7 @@ namespace ArcTouch.Cinephile.Services
                 {
                     string response = await call.Content.ReadAsStringAsync();
 
-                    T result = JsonConvert.DeserializeObject<T>(response);
+                    T result = JsonConvert.DeserializeObject<T>(response, jsonSettings);
 
                     return result;
                 }
