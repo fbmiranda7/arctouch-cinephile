@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace ArcTouch.Cinephile.Services.TMDb
 {
     /// <summary>
-    /// Wraps the result json for the upcoming movies query
+    /// Wraps the result json for movies queries
     /// </summary>
     public class Result
     {

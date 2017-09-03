@@ -11,5 +11,8 @@ namespace ArcTouch.Cinephile.Presenters.Interfaces
     {
         Task FetchAndAppend();
         void OnItemSelected(MovieItem movieItem);
+        void OnSearchTapped();
+        void OnSearchBarUnfocused();
+        void OnSearch(string oldTextValue, string newTextValue);
     }
 }

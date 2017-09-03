@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System;
 
 namespace ArcTouch.Cinephile.Views
 {
@@ -15,6 +16,7 @@ namespace ArcTouch.Cinephile.Views
     public partial class UpcomingView : BaseView
     {
         private ObservableCollection<MovieItem> movieList = new ObservableCollection<MovieItem>();
+        private bool isSearch;
 
         private IUpcomingPresenter Presenter
         {
@@ -35,6 +37,24 @@ namespace ArcTouch.Cinephile.Views
 
             list.ItemsSource = movieList;
 
+            search.GestureRecognizers.Add(new TapGestureRecognizer(SearchTapped));
+            searchBar.Unfocused += SearchBar_Unfocused;
+            searchBar.TextChanged += SearchBar_TextChanged;
+        }
+
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Presenter.OnSearch(e.OldTextValue, e.NewTextValue);
+        }
+
+        private void SearchBar_Unfocused(object sender, FocusEventArgs e)
+        {
+            Presenter.OnSearchBarUnfocused();
+        }
+
+        private void SearchTapped(View sender)
+        {
+            Presenter.OnSearchTapped();
         }
 
         private void List_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -50,19 +70,40 @@ namespace ArcTouch.Cinephile.Views
 
         private void List_ItemAppearing(object sender, ItemVisibilityEventArgs e)
         {
-            var items = list.ItemsSource as IList;
+            if (!isSearch)
+            {
+                var items = list.ItemsSource as IList;
 
-            // on the last item, request for more
-            if (e.Item == items[items.Count - 1])
-                Presenter.FetchAndAppend();
+                // on the last item, request for more
+                if (e.Item == items[items.Count - 1])
+                    Presenter.FetchAndAppend();
+            }
         }
 
-        internal void AppendResults(IEnumerable<Movie> upcomingMovies)
+        internal void AppendResults(IEnumerable<Movie> upcomingMovies, bool isSearch)
         {
+            this.isSearch = isSearch;
+
             // append items to the end of the observable collection, not refreshing it entirely
             foreach (Movie movie in upcomingMovies)
                 movieList.Add(new MovieItem(movie));
+
+            if (isSearch && movieList.Count > 0)
+                list.ScrollTo(movieList[0], ScrollToPosition.Start, false);
         }
 
+        internal void DisplaySearchTextBox(bool display)
+        {
+            searchBar.IsVisible = bgSearchBar.IsVisible = display;
+            search.IsVisible = !display;
+
+            if (display)
+                searchBar.Focus();
+        }
+
+        internal void ClearResults()
+        {
+            movieList.Clear();
+        }
     }
 }

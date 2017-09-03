@@ -23,6 +23,7 @@ namespace ArcTouch.Cinephile.Services
         {
             public const string Upcoming = "movie/upcoming";
             public const string GenreList = "genre/movie/list";
+            public const string Search = "search/movie";
         }
 
         public TMDbProvider()
@@ -42,6 +43,17 @@ namespace ArcTouch.Cinephile.Services
         public async Task<IEnumerable<Movie>> FetchUpcoming(int page = 1)
         {
             string url = FormatUrl(Calls.Upcoming, "&page=" + page);
+
+            Result result = await Request<Result>(url);
+
+            UpdateRelativePaths(result.Results);
+
+            return result.Results;
+        }
+
+        public async Task<IEnumerable<Movie>> Search(string query)
+        {
+            string url = FormatUrl(Calls.Search, "&query=" + System.Net.WebUtility.UrlEncode(query));
 
             Result result = await Request<Result>(url);
 
@@ -99,11 +111,6 @@ namespace ArcTouch.Cinephile.Services
         private string FormatUrl(string call, string additionalParameters = "")
         {
             return string.Format(BASE_URL, call, API_KEY) + additionalParameters;
-        }
-
-        public async Task<IEnumerable<Movie>> Search(string query)
-        {
-            throw new NotImplementedException();
         }
 
         public IEnumerable<Genre> GetGenres(int[] genreIds)
