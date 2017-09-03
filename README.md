@@ -27,3 +27,6 @@ Deserializes strings containing Json formatted objects
 
 ## Compiling
 A direct build targeting a developer enabled Android device should do the trick, it's expected that the nuget packages to be restored automatically during the build.
+
+## Known bug
+* For some reason after a search is finished, when the user presses the searchbar "X" the keyboard pops up again, tried a fix with a custom render, but still no success.
